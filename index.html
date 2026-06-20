@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NEO ClassBoard - 基于 PySide6 + QML 的桌面课表小组件，常驻于桌面顶部，实时显示当前/下一节课信息，支持换课、调休、提示音、自动隐藏等实用功能。">
+  <meta name="theme-color" content="#6750A4">
+  <meta property="og:title" content="NEO ClassBoard - 桌面课表小组件">
+  <meta property="og:description" content="基于 PySide6 + QML 的桌面课表小组件，常驻于桌面顶部，实时显示当前/下一节课信息">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="icons/logo.svg">
+  <link rel="icon" type="image/svg+xml" href="icons/logo.svg">
+  <title>NEO ClassBoard - 桌面课表小组件</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-blur bg-blur-1"></div>
+  <div class="bg-blur bg-blur-2"></div>
+  <div class="bg-blur bg-blur-3"></div>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <a href="#" class="logo">
+          <img src="icons/logo.svg" alt="NEO ClassBoard" class="logo-img">
+          <span class="logo-text">NEO <em>ClassBoard</em></span>
+        </a>
+        <div class="nav-links">
+          <a href="#features">功能特性</a>
+          <a href="#preview">界面预览</a>
+          <a href="#tech">技术栈</a>
+          <a href="#download">使用说明</a>
+        </div>
+      </div>
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+        </button>
+        <a href="https://github.com/mangchenofficial/NEO-ClassBoard" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2a4.7 4.7 0 0 1 1.2 3.2c0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4h7.6l-6 4.4 2.4 7.4-6.4-4.4-6.4 4.4 2.4-7.4-6-4.4h7.6z"/></svg>
+            <span>专为教师打造的桌面小工具</span>
+          </div>
+          <h1 class="hero-title">
+            <span>桌面课表</span>
+            <span class="hero-gradient"><span id="typedText"></span><span class="typed-cursor">|</span></span>
+          </h1>
+          <p class="hero-subtitle">
+            基于 PySide6 + QML 的桌面课表小组件，常驻于桌面顶部，
+            实时显示当前/下一节课信息，支持换课、调休、提示音、自动隐藏等实用功能。
+          </p>
+          <div class="hero-actions">
+            <a href="https://github.com/mangchenofficial/NEO-ClassBoard" target="_blank" rel="noopener" class="btn btn-primary btn-large">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2a4.7 4.7 0 0 1 1.2 3.2c0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+              GitHub 仓库
+            </a>
+            <a href="#preview" class="btn btn-ghost btn-large">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+              界面预览
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-value">~250<span class="stat-unit">MB</span></div>
+              <div class="stat-label">安装包体积</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <div class="stat-value">Win<span class="stat-unit">10/11</span></div>
+              <div class="stat-label">系统支持</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <div class="stat-value">MIT<span class="stat-unit">License</span></div>
+              <div class="stat-label">开源协议</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <img src="hero.jpg" alt="NEO ClassBoard 产品展示" class="hero-image">
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="section-header">
+        <div class="section-tag">功能特性</div>
+        <h2 class="section-title">
+          简单实用，<span class="text-gradient">专注课堂</span>
+        </h2>
+        <p class="section-desc">
+          每一个功能都是为了让您的课堂管理更高效
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="feature-title">实时课表显示</h3>
+          <p class="feature-desc">当前课程高亮显示，自动切换到下一节课，一目了然</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3 class="feature-title">换课管理</h3>
+          <p class="feature-desc">临时调整某天的课程顺序，支持恢复操作</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M7 15h1m4 0h1M12 3a9 9 0 1 0 9 9"/><circle cx="12" cy="10" r="4"/></svg>
+          </div>
+          <h3 class="feature-title">调休日</h3>
+          <p class="feature-desc">将周末按指定工作日课表运行</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg>
+          </div>
+          <h3 class="feature-title">自定义提示音</h3>
+          <p class="feature-desc">课前/课中/课末自定义提示音与音量</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2" ry="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+          </div>
+          <h3 class="feature-title">自动隐藏</h3>
+          <p class="feature-desc">上课时隐藏、窗口最大化时隐藏、全屏时隐藏</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-6">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h3 class="feature-title">主题定制</h3>
+          <p class="feature-desc">缩放、透明度、字体切换，内置 MiSans 字体</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-7">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h3 class="feature-title">迷你模式</h3>
+          <p class="feature-desc">紧凑显示，节省屏幕空间，不遮挡视线</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-8">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          </div>
+          <h3 class="feature-title">系统托盘</h3>
+          <p class="feature-desc">托盘图标快速访问所有功能，便捷管理</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-9">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="feature-title">单实例运行</h3>
+          <p class="feature-desc">防止程序重复启动，确保运行状态</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="preview-section" id="preview">
+      <div class="section-header">
+        <div class="section-tag">界面预览</div>
+        <h2 class="section-title">
+          <span class="text-gradient">精致界面</span>，赏心悦目
+        </h2>
+        <p class="section-desc">
+          基于 Material Design 3 设计风格，现代简洁
+        </p>
+      </div>
+
+      <div class="preview-container">
+        <div class="preview-main">
+          <img src="preview.png" alt="NEO ClassBoard 界面预览" class="preview-image">
+        </div>
+      </div>
+    </section>
+
+    <section class="tech-section" id="tech">
+      <div class="section-header">
+        <div class="section-tag">技术栈</div>
+        <h2 class="section-title">
+          <span class="text-gradient">现代技术</span>，稳定可靠
+        </h2>
+        <p class="section-desc">
+          使用业界成熟方案构建
+        </p>
+      </div>
+
+      <div class="tech-grid">
+        <div class="tech-card">
+          <div class="tech-icon tech-icon-python">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 1 3 3v3H9v3h9a3 3 0 0 1 3 3v3a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-3h3v-3H6a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h6zM9 2h.01M15 14h.01"/></svg>
+          </div>
+          <h3 class="tech-title">Python 3.14+</h3>
+          <p class="tech-desc">简洁优雅的编程语言</p>
+        </div>
+        <div class="tech-card">
+          <div class="tech-icon tech-icon-qt">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8"/><circle cx="12" cy="8" r="2"/><circle cx="12" cy="16" r="2"/></svg>
+          </div>
+          <h3 class="tech-title">PySide6 + QML</h3>
+          <p class="tech-desc">跨平台 UI 框架</p>
+        </div>
+        <div class="tech-card">
+          <div class="tech-icon tech-icon-md3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V2l16 10L4 22z"/></svg>
+          </div>
+          <h3 class="tech-title">Material Design 3</h3>
+          <p class="tech-desc">现代化设计风格</p>
+        </div>
+        <div class="tech-card">
+          <div class="tech-icon tech-icon-build">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 3-6 6v6h6l6-6"/><path d="M9 21h12"/><path d="M3 9l6 6"/></svg>
+          </div>
+          <h3 class="tech-title">PyInstaller</h3>
+          <p class="tech-desc">单文件 exe 打包</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="download-section" id="download">
+      <div class="section-header">
+        <div class="section-tag">下载</div>
+        <h2 class="section-title">
+          立即下载，<span class="text-gradient">即刻使用</span>
+        </h2>
+        <p class="section-desc">
+          单文件绿色软件，下载即用
+        </p>
+      </div>
+
+      <div class="download-hero">
+        <a href="https://ghproxy.com/https://github.com/mangchenofficial/NEO-ClassBoard/releases/download/1.3.0/ClassBoard.exe" class="btn btn-primary btn-large" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          CDN 加速下载 · ClassBoard.exe
+        </a>
+        <div class="download-meta">
+          <span>版本 1.3.0</span>
+          <span class="dot-sep">·</span>
+          <span>Windows 10/11</span>
+          <span class="dot-sep">·</span>
+          <span>~250 MB</span>
+        </div>
+        <div class="download-alt">
+          <a href="https://github.com/mangchenofficial/NEO-ClassBoard/releases" target="_blank" rel="noopener">GitHub Releases 原始下载 →</a>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top: 60px;">
+        <div class="section-tag">使用说明</div>
+        <h2 class="section-title">
+          开始使用，<span class="text-gradient">只需三步</span>
+        </h2>
+        <p class="section-desc">
+          免费开源，简单易用
+        </p>
+      </div>
+
+      <div class="download-grid">
+        <div class="download-card">
+          <div class="download-step">1</div>
+          <div class="download-icon download-icon-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 12h20M12 2v20"/></svg>
+          </div>
+          <h3 class="download-title">运行程序</h3>
+          <p class="download-desc">双击 ClassBoard.exe 即可启动</p>
+        </div>
+        <div class="download-card">
+          <div class="download-step">2</div>
+          <div class="download-icon download-icon-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <h3 class="download-title">导入课表</h3>
+          <p class="download-desc">支持 CSES 格式课表</p>
+        </div>
+        <div class="download-card">
+          <div class="download-step">3</div>
+          <div class="download-icon download-icon-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h3 class="download-title">配置完成</h3>
+          <p class="download-desc">托盘快速访问所有功能</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <img src="icons/logo.svg" alt="NEO ClassBoard" class="logo-img">
+          <span class="logo-text">NEO <em>ClassBoard</em></span>
+        </a>
+        <p class="footer-desc">
+          专为教师打造的桌面课表小组件
+        </p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>产品</h4>
+          <a href="#features">功能特性</a>
+          <a href="#preview">界面预览</a>
+          <a href="#download">使用说明</a>
+        </div>
+        <div class="footer-col">
+          <h4>GitHub</h4>
+          <a href="https://github.com/mangchenofficial/NEO-ClassBoard" target="_blank" rel="noopener">主项目</a>
+          <a href="https://github.com/mangchenofficial/NEO-ClassBoard/blob/main/README.md" target="_blank" rel="noopener">README</a>
+          <a href="https://github.com/mangchenofficial/NEO-ClassBoard/blob/main/LICENSE" target="_blank" rel="noopener">开源协议</a>
+        </div>
+        <div class="footer-col">
+          <h4>技术</h4>
+          <a href="#tech">技术栈</a>
+          <a href="https://github.com/mangchenofficial/NEO-ClassBoard/issues" target="_blank" rel="noopener">问题反馈</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 NEO ClassBoard. 基于 MIT 协议开源。</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
