@@ -908,7 +908,7 @@ section {
 
 .dl-hero {
   position: relative;
-  padding: 80px 20px 60px;
+  padding: 100px 20px 80px;
   overflow: hidden;
 }
 
@@ -927,26 +927,56 @@ section {
 .dl-hero-inner {
   position: relative;
   z-index: 1;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 60px;
-  align-items: center;
+  display: block;
+  text-align: center;
 }
 
-.version-badge {
+.dl-hero-welcome {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  background: linear-gradient(135deg, rgba(103, 80, 164, 0.12), rgba(103, 80, 164, 0.06));
-  border: 1px solid var(--primary-light);
+  gap: 8px;
+  padding: 8px 18px;
   border-radius: 100px;
-  font-size: 13px;
-  font-weight: 500;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.dl-hero-welcome svg {
+  color: #ef4444;
+}
+
+.dl-hero-thanks {
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 8px;
+  letter-spacing: -2px;
   color: var(--primary);
-  margin-bottom: 20px;
+}
+
+.dl-hero-product {
+  font-size: clamp(40px, 6.5vw, 80px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 28px;
+  letter-spacing: -2px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dl-hero-version {
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 600;
+  color: var(--text-muted);
+  opacity: 0.85;
 }
 
 .dl-hero-title {
@@ -966,11 +996,11 @@ section {
 }
 
 .dl-hero-desc {
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.7;
   color: var(--text-muted);
-  margin: 0 0 32px;
-  max-width: 560px;
+  margin: 0 auto 40px;
+  max-width: 720px;
 }
 
 .dl-hero-actions {
@@ -978,6 +1008,7 @@ section {
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 28px;
+  justify-content: center;
 }
 
 .dl-hero-actions .btn {
@@ -991,6 +1022,7 @@ section {
   flex-wrap: wrap;
   font-size: 14px;
   color: var(--text-secondary);
+  justify-content: center;
 }
 
 .dl-meta-item {
@@ -1006,104 +1038,6 @@ section {
 
 .dl-meta-sep {
   color: var(--border);
-}
-
-.dl-hero-visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.dl-card-float {
-  width: 100%;
-  max-width: 360px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 28px;
-  box-shadow: 0 24px 64px rgba(103, 80, 164, 0.22), 0 8px 20px rgba(103, 80, 164, 0.08);
-  animation: floatY 6s ease-in-out infinite;
-}
-
-@keyframes floatY {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-.dl-card-logo {
-  width: 64px;
-  height: 64px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-  box-shadow: 0 8px 20px rgba(103, 80, 164, 0.35);
-}
-
-.dl-card-logo img {
-  width: 36px;
-  height: 36px;
-}
-
-.dl-card-info {
-  margin-bottom: 20px;
-}
-
-.dl-card-name {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 4px;
-}
-
-.dl-card-size {
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-.dl-card-progress {
-  height: 8px;
-  background: var(--bg-hover);
-  border-radius: 100px;
-  overflow: hidden;
-  margin-bottom: 14px;
-}
-
-.dl-card-progress-bar {
-  height: 100%;
-  width: 65%;
-  background: linear-gradient(90deg, var(--primary), var(--primary-light));
-  border-radius: 100px;
-  animation: progressPulse 2.4s ease-in-out infinite;
-}
-
-@keyframes progressPulse {
-  0%, 100% { opacity: 1; width: 65%; }
-  50% { opacity: 0.85; width: 72%; }
-}
-
-.dl-card-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.dl-status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
-  animation: statusPulse 1.6s ease-in-out infinite;
-}
-
-@keyframes statusPulse {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18); }
-  50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.08); }
 }
 
 /* Detail Section */
