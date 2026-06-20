@@ -720,16 +720,9 @@ section {
   text-align: center;
 }
 
-.download-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.download-buttons .btn {
-  font-size: 16px;
-  padding: 14px 28px;
+.download-hero .btn {
+  font-size: 18px;
+  padding: 16px 36px;
 }
 
 .download-meta {
