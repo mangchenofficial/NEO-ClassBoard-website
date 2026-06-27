@@ -123,4 +123,49 @@
 
     tick();
   }
+
+  var modal = document.getElementById('mirrorModal');
+  var closeBtn = document.getElementById('mirrorModalClose');
+  var mirrorBtns = document.querySelectorAll('.mirror-dl-btn');
+  var platformBtns = document.querySelectorAll('.mirror-platform-btn');
+
+  if (modal) {
+    mirrorBtns.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    platformBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var url = this.getAttribute('data-url');
+        if (url) {
+          window.open(url, '_blank', 'noopener');
+        }
+      });
+    });
+  }
 })();
