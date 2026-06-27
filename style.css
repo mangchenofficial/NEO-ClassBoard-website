@@ -1166,8 +1166,14 @@ section {
 }
 
 .dl-option-icon-github {
-  background: linear-gradient(135deg, rgba(30, 30, 30, 0.1), rgba(30, 30, 30, 0.04));
-  color: var(--text);
+  background: #24292e;
+  color: #fff;
+}
+
+.dl-option-icon-github svg,
+.dl-option-icon-github img {
+  width: 28px;
+  height: 28px;
 }
 
 .dl-option-icon-list {
