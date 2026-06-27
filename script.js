@@ -53,7 +53,7 @@
   }, { passive: true });
 
   if ('IntersectionObserver' in window) {
-    const elements = document.querySelectorAll('.feature-card, .tech-card, .download-card, .hero-card, .preview-main, .section-header');
+    const elements = document.querySelectorAll('.feature-card, .tech-card, .section-header, .dl-option, .dl-download-section, .dl-side-card');
     elements.forEach(function (el, index) {
       el.style.opacity = '0';
       el.style.transform = 'translateY(30px)';
