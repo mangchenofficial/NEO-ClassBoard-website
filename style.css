@@ -1057,14 +1057,14 @@ section {
 /* Detail Section */
 
 .dl-detail {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 40px 20px 80px;
 }
 
 .dl-detail-grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: 32px;
 }
 
